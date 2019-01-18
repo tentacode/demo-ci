@@ -1,0 +1,6 @@
+App\Entity\Person:
+    toto:
+        name: 'toto'
+
+    random-{0..100}:
+        name: <firstname()>

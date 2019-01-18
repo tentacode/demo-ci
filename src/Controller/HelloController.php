@@ -22,19 +22,21 @@ class HelloController extends AbstractController
 
         $foundPerson = null;
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
             
             $entityManager = $this->getDoctrine()->getManager();
             $repository = $entityManager->getRepository(Person::class);
 
             $foundPerson = $repository->findOneByName($person->getName());
+            if (!$foundPerson) {
+                throw new \Exception('Pas trouvé');
+            }
         }
 
         return $this->render('hello/index.html.twig', [
             'found_person' => $foundPerson,
             'form' => $form->createView(),
         ]);
-
     }
 }

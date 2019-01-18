@@ -1,0 +1,26 @@
+language: php
+
+php:
+    - 7.2
+
+services:
+    - mysql
+
+cache:
+    yarn: true
+    directories:
+        - $HOME/.composer/cache/files
+
+before_install:
+    - phpenv config-rm xdebug.ini
+
+install:
+    - make install
+
+before_script:
+    - make reset
+    - make build
+    - make start
+
+script:
+    - make test
